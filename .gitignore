@@ -1,0 +1,21 @@
+# 환경변수 (API 키, 토큰 등 민감 정보)
+.env
+
+# 런타임 상태 파일 (이슈별 진행 상태, 포트 맵, PID)
+state/
+
+# 실행 로그
+logs/
+
+# Node.js 의존성
+node_modules/
+
+# 백업 파일
+*.bak
+*.bak.*
+
+# Claude Code 로컬 설정
+.claude/
+
+# 아카이브된 스킬
+skills/*.archived
