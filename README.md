@@ -136,11 +136,11 @@ linear-pipeline/
 ## NAS 배포 (Reviewed 완료 후)
 
 ```bash
-# 프로젝트 repo에서 (최초 1회)
+# 최초 1회
 git clone https://github.com/your-id/project-name.git
 cd project-name
 echo 'HOST_PORT=원하는포트번호' > .env
-docker compose up -d --build
+docker compose up -d --build   # Dockerfile로 로컬 빌드 후 실행
 
 # 이후 업데이트 시
 git pull origin main

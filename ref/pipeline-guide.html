@@ -792,7 +792,7 @@
               <div class="step-label">Dockerfile + docker-compose.yml + .env.example 생성</div>
               <div class="step-detail">
                 <div>• 프로젝트 유형 자동 감지 (nextjs / nodejs / python / golang) → 멀티스테이지 Dockerfile</div>
-                <div>• <span class="ic">docker-compose.yml</span>: GHCR 이미지 참조, 포트는 <span class="ic">${HOST_PORT}</span> 환경변수로 수동 지정</div>
+                <div>• <span class="ic">docker-compose.yml</span>: 로컬 빌드 (<span class="ic">build: .</span>), 포트는 <span class="ic">${HOST_PORT}</span> 환경변수로 수동 지정</div>
                 <div>• <span class="ic">.env.example</span>: <span class="ic">HOST_PORT=</span> 안내 포함</div>
                 <div>• <span class="ic">.dockerignore</span> 자동 생성</div>
                 <div style="margin-top:4px;">→ main 브랜치에 commit & push</div>
@@ -872,15 +872,11 @@ SLACK_WEBHOOK_URL=https://hooks.slack.com/...</code></pre>
           <span>첫 Reviewed 머지 후 repo의 main 브랜치에 <span class="ic">Dockerfile</span>과 <span class="ic">docker-compose.yml</span>이 자동으로 생성됩니다.</span>
         </div>
         <p>NAS에서 아래 순서로 실행합니다:</p>
-        <pre><code><span class="c"># 1. repo clone</span>
+        <pre><code><span class="c"># 최초 1회</span>
 git clone https://github.com/your-id/project-name.git
 cd project-name
-
-<span class="c"># 2. 호스트 포트 설정</span>
 echo 'HOST_PORT=원하는포트번호' > .env
-
-<span class="c"># 3. 이미지 빌드 & 실행</span>
-docker compose up -d --build</code></pre>
+docker compose up -d --build   <span class="c"># Dockerfile로 로컬 빌드 후 실행</span></code></pre>
         <p>이후 업데이트 시:</p>
         <pre><code>cd project-name
 git pull origin main

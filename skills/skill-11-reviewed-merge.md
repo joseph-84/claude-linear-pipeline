@@ -285,15 +285,11 @@ case "$PROJECT_TYPE" in
   *)      CONTAINER_PORT=8080 ;;
 esac
 
-GITHUB_USER=$(echo "$FULL_REPO" | cut -d'/' -f1)
-REPO_LOWER=$(echo "$FULL_REPO" | tr '[:upper:]' '[:lower:]')
-GHCR_IMAGE="ghcr.io/${REPO_LOWER}"
-
-# docker-compose.yml 생성
+# docker-compose.yml 생성 (로컬 빌드 방식)
 cat > "$PROJECT_ROOT/docker-compose.yml" << EOF
 services:
   app:
-    image: ${GHCR_IMAGE}:latest
+    build: .
     restart: always
     ports:
       - "\${HOST_PORT}:${CONTAINER_PORT}"
@@ -351,11 +347,10 @@ git clone https://github.com/${FULL_REPO}.git
 echo 'HOST_PORT=원하는포트번호' > .env
 \`\`\`
 
-### 3. 이미지 빌드 및 실행
+### 3. 빌드 & 실행
 
 \`\`\`bash
-docker compose pull   # GHCR에서 이미지 pull (빌드 후)
-docker compose up -d  # 또는 Container Manager에서 시작
+docker compose up -d --build
 \`\`\`
 
 > **Dockerfile 위치:** [${FULL_REPO}/blob/main/Dockerfile](${GITHUB_REPO_URL}/blob/main/Dockerfile)"
