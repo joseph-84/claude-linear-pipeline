@@ -416,8 +416,11 @@ curl -s -X POST "$SLACK_WEBHOOK_URL" \
         ]
       },
       {
-        \"type\": \"context\",
-        \"elements\": [{\"type\": \"mrkdwn\", \"text\": \"NAS에서 .env에 HOST_PORT를 설정한 뒤 \`docker compose up -d\`를 실행하세요.\"}]
+        \"type\": \"section\",
+        \"text\": {
+          \"type\": \"mrkdwn\",
+          \"text\": \"*🚀 NAS 배포 명령어*\\n*최초 1회*\\n\`\`\`git clone https://github.com/${FULL_REPO}.git\\ncd $(echo "$FULL_REPO" | cut -d'/' -f2)\\necho 'HOST_PORT=포트번호' > .env\\ndocker compose up -d --build\`\`\`\\n*이후 업데이트*\\n\`\`\`git pull origin main\\ndocker compose up -d --build\`\`\`\"
+        }
       },
       {
         \"type\": \"actions\",
