@@ -96,6 +96,31 @@ crontab -e
 */5 * * * * /usr/bin/node /workspace/linear-pipeline/linear-monitor.js >> /workspace/linear-pipeline/logs/cron.log 2>&1
 ```
 
+## GitHub PAT 갱신
+
+PAT가 만료되거나 갱신이 필요할 때는 `.env`의 `GITHUB_TOKEN` 값만 교체하면 됩니다.
+
+### 갱신 절차
+
+1. GitHub → **Settings** → **Developer settings** → **Personal access tokens** → **Tokens (classic)**
+2. 사용 중인 토큰 클릭 → **Regenerate token** (권한은 그대로 유지됨)
+3. 생성된 새 토큰을 복사
+4. 서버에서 `.env` 수정:
+
+```bash
+# /workspace/linear-pipeline/.env
+GITHUB_TOKEN=ghp_새토큰값
+```
+
+5. `linear-monitor.js` 재시작 (cron이면 다음 실행 시 자동 반영):
+
+```bash
+# webhook-server.js를 사용 중인 경우에만 재시작 필요
+pm2 restart linear-webhook   # 또는 해당 프로세스 재시작
+```
+
+> 필요 권한: `repo`, `pull_requests`, `workflow`
+
 ## 환경변수
 
 | 항목 | 설명 |

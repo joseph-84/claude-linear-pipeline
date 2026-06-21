@@ -859,6 +859,31 @@ SLACK_WEBHOOK_URL=https://hooks.slack.com/...</code></pre>
       </div>
     </div>
 
+    <div class="setup-card">
+      <div class="setup-head" onclick="toggleSetup(this)">
+        <div class="setup-dot" style="background:var(--red)"></div>
+        <div class="setup-title">GitHub PAT 갱신</div>
+        <div class="setup-tag" style="background:var(--red-dim);color:var(--red)">만료 시</div>
+        <div class="setup-chevron">▼</div>
+      </div>
+      <div class="setup-body">
+        <div class="callout warn">
+          <span class="callout-icon">⚠️</span>
+          <span>PAT가 만료되면 GitHub API 호출이 모두 실패합니다. <span class="ic">.env</span>의 <span class="ic">GITHUB_TOKEN</span> 값만 교체하면 됩니다.</span>
+        </div>
+        <p>갱신 절차</p>
+        <table>
+          <tr><th>단계</th><th>내용</th></tr>
+          <tr><td>1</td><td>GitHub → Settings → Developer settings → Personal access tokens → Tokens (classic)</td></tr>
+          <tr><td>2</td><td>사용 중인 토큰 클릭 → <strong>Regenerate token</strong> (권한은 그대로 유지됨)</td></tr>
+          <tr><td>3</td><td>생성된 새 토큰 복사</td></tr>
+          <tr><td>4</td><td>서버에서 <span class="ic">.env</span> 수정: <span class="ic">GITHUB_TOKEN=ghp_새토큰값</span></td></tr>
+          <tr><td>5</td><td>cron 방식은 다음 실행 시 자동 반영 / webhook-server.js 사용 시 프로세스 재시작</td></tr>
+        </table>
+        <p>필요 권한: <span class="ic">repo</span>, <span class="ic">pull_requests</span>, <span class="ic">workflow</span></p>
+      </div>
+    </div>
+
     <div class="setup-card open">
       <div class="setup-head" onclick="toggleSetup(this)">
         <div class="setup-dot"></div>
